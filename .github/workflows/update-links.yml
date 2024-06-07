@@ -2,7 +2,7 @@ name: Update Links and Deploy
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Runs every 5 minutes
+    - cron: '*/30 * * * *'  # Runs every 5 minutes
 
 jobs:
   build:
