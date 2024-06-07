@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 
-const url = 'https://techyhigher.com/gametwist-slots-free-coins/';
+const url = 'https://www.slotparkbonuscode.de/';
 
 axios.get(url).then(({ data }) => {
   const $ = cheerio.load(data);
