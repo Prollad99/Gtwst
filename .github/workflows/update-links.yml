@@ -2,7 +2,7 @@ name: Update Links and Deploy
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Runs every hour
+    - cron: '0 * * * *' # Runs every hour
 
 jobs:
   build:
@@ -10,12 +10,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v2
       with:
-        node-version: '20'
+        node-version: '14'
 
     - name: Install dependencies
       run: |
@@ -25,25 +25,22 @@ jobs:
 
     - name: Fetch Gametwist Links
       run: |
-        node -e "
-        const axios = require('axios');
-        const cheerio = require('cheerio');
-        const fs = require('fs');
-        const url = 'https://techyhigher.com/gametwist-slots-free-coins/';
-
+        node -e '
+        const axios = require("axios");
+        const cheerio = require("cheerio");
+        const fs = require("fs");
+        const url = "https://techyhigher.com/gametwist-slots-free-coins/";
         axios.get(url).then(({ data }) => {
           const $ = cheerio.load(data);
           const links = [];
-          $('a[href*=\"gametwist\"]').each((index, element) => {
-            links.push($(element).attr('href'));
+          $("a[href*=\'gametwist\']").each((index, element) => {
+            links.push($(element).attr("href"));
           });
-          console.log('Fetched links:', links);
-          fs.writeFileSync('links.json', JSON.stringify(links));
+          fs.writeFileSync("links.json", JSON.stringify(links));
         }).catch(err => {
-          console.error('Error fetching links:', err);
-          process.exit(1);  // Exit with an error code
+          console.error("Error fetching links:", err);
         });
-        "
+        '
 
     - name: Update Reward Page
       run: |
