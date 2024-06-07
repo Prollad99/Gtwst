@@ -18,14 +18,10 @@ jobs:
         node-version: '14'
 
     - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y jq
-        npm install
+      run: npm install axios cheerio
 
     - name: Fetch Gametwist Links
-      run: |
-        node fetch-links.js
+      run: node fetch-links.js
 
     - name: Update Reward Page
       run: |
