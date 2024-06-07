@@ -29,7 +29,7 @@ jobs:
         const axios = require('axios');
         const cheerio = require('cheerio');
         const fs = require('fs');
-        const url = 'https://www.gaminatorbonuscode.net/';
+        const url = 'https://www.slotparkbonuscode.de/';
 
         axios.get(url).then(({ data }) => {
           const $ = cheerio.load(data);
