@@ -66,7 +66,8 @@ jobs:
           git commit -m "Update reward links"
 
       - name: Push changes
-        env:
-          TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        run: |
-          git push https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/Prollad99/Gtwst.git
+  env:
+    TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+  run: |
+    git pull --rebase https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/Prollad99/Gtwst.git main
+    git push https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/Prollad99/Gtwst.git main
