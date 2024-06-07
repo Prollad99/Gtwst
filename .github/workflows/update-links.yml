@@ -34,7 +34,7 @@ jobs:
         axios.get(url).then(({ data }) => {
           const $ = cheerio.load(data);
           const links = [];
-          $('a[href*=\"gametwist\"]').each((index, element) => {
+          $('a[href*=\"slot.pk/"]').each((index, element) => {
             links.push($(element).attr('href'));
           });
           console.log('Fetched links:', links);
