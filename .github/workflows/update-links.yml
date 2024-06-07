@@ -39,9 +39,9 @@ jobs:
               .then(body => {
                 const dom = new JSDOM(body);
                 const document = dom.window.document;
-                const links = Array.from(document.querySelectorAll('a[href*=\"slot.pk\"]')).map(a => a.href);
+                const links = Array.from(document.querySelectorAll('a[href*=\"slot.pk\"]')).map(a => ({ href: a.href }));
                 console.log('Fetched links:', links);
-                fs.writeFileSync('links.json', JSON.stringify(links));
+                fs.writeFileSync('links.json', JSON.stringify(links, null, 2));
               })
               .catch(err => {
                 console.error('Error fetching links:', err);
