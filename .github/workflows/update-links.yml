@@ -18,7 +18,7 @@ jobs:
         node-version: '14'
 
     - name: Install dependencies
-      run: npm install axios cheerio
+      run: npm install
 
     - name: Fetch Gametwist Links
       run: |
@@ -42,7 +42,9 @@ jobs:
 
     - name: Update Reward Page
       run: |
-        cat links.json | jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' > reward.html
+        echo "<html><body>" > reward.html
+        cat links.json | jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' >> reward.html
+        echo "</body></html>" >> reward.html
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
         git add reward.html
