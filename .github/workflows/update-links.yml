@@ -46,7 +46,7 @@ jobs:
     - name: Update Reward Page
       run: |
         echo "<html><body>" > reward.html
-        cat links.json | jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' >> reward.html
+        jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' links.json >> reward.html
         echo "</body></html>" >> reward.html
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
