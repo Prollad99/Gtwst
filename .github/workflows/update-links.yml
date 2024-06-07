@@ -29,7 +29,7 @@ jobs:
         const axios = require('axios');
         const cheerio = require('cheerio');
         const fs = require('fs');
-        const url = 'https://www.slotparkbonuscode.de/';
+        const url = 'https://techyhigher.com/gametwist-slots-free-coins/';
 
         axios.get(url).then(({ data }) => {
           const $ = cheerio.load(data);
@@ -63,6 +63,6 @@ jobs:
 
     - name: Push changes
       env:
-        TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git push https://${TOKEN}@github.com/Prollad99/Gtwst.git
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Prollad99/Gtwst.git
