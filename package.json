@@ -1,6 +1,13 @@
 {
+  "name": "gametwist-free-coins",
+  "version": "1.0.0",
+  "description": "Automate fetching Gametwist free coins links",
+  "main": "index.js",
   "dependencies": {
-    "node-fetch": "^2.6.1",
-    "jsdom": "^16.5.3"
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.10"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
