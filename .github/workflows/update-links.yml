@@ -62,7 +62,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add reward.html
+          git add reward.html links.json package.json package-lock.json
           git commit -m "Update reward links"
 
       - name: Push changes
