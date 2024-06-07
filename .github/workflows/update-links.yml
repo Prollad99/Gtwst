@@ -1,35 +1,41 @@
 name: Update Links and Deploy
 
 on:
-  schedule:
-    - cron: '0 * * * *' # Runs every hour
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install dependencies
-      run: npm install axios cheerio
+      - name: Generate reward.html
+        run: |
+          echo "<html><body>" > reward.html
+          jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' links.json >> reward.html
+          echo "</body></html>" >> reward.html
 
-    - name: Fetch Gametwist Links
-      run: node fetch-links.js
+      - name: Configure Git
+        run: |
+          git config --global user.email "prolladmail@gmail.com"
+          git config --global user.name "Prollad99"
 
-    - name: Update Reward Page
-      run: |
-        echo "<html><body>" > reward.html
-        jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' links.json >> reward.html
-        echo "</body></html>" >> reward.html
-        git config --global user.email "prolladmail@gmail.com"
-        git config --global user.name "Prollad99"
-        git add reward.html
-        git commit -m "Update reward links"
-        git push
+      - name: Commit changes
+        run: |
+          git add reward.html
+          git commit -m "Update reward links"
+
+      - name: Push changes
+        env:
+          TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        run: |
+          git push https://${TOKEN}@github.com/Prollad99/Gtwst.git
