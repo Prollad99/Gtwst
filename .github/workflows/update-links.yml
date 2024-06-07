@@ -37,9 +37,11 @@ jobs:
           $('a[href*=\"gametwist\"]').each((index, element) => {
             links.push($(element).attr('href'));
           });
+          console.log('Fetched links:', links);
           fs.writeFileSync('links.json', JSON.stringify(links));
         }).catch(err => {
           console.error('Error fetching links:', err);
+          process.exit(1);  // Exit with an error code
         });
         "
 
