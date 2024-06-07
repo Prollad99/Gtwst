@@ -46,10 +46,14 @@ jobs:
     - name: Update Reward Page
       run: |
         echo "<html><body>" > reward.html
-        jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' links.json >> reward.html
-        echo "</body></html>" >> reward.html
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
-        git add reward.html
-        git commit -m "Update reward links"
-        git push
+
+# This command assumes the JSON structure is a simple array of objects with "href" keys
+jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' links.json >> reward.html
+
+echo "</body></html>" >> reward.html
+
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+git add reward.html
+git commit -m "Update reward links"
+git push
