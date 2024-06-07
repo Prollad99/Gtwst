@@ -2,57 +2,54 @@ name: Update Links and Deploy
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
+    - cron: '0 * * * *'  # Runs every hour
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq
-          npm install
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq
+        npm install
 
-      - name: Fetch Gametwist Links
-        run: |
-          node -e "
-          const axios = require('axios');
-          const cheerio = require('cheerio');
-          const fs = require('fs');
-          const url = 'https://techyhigher.com/gametwist-slots-free-coins/';
-          axios.get(url).then(({ data }) => {
-            const $ = cheerio.load(data);
-            const links = [];
-            $('a[href*=\"gametwist\"]').each((index, element) => {
-              const href = $(element).attr('href');
-              const text = $(element).text();
-              links.push({ href, text });
-            });
-            console.log('Fetched links:', links);
-            fs.writeFileSync('links.json', JSON.stringify(links, null, 2));
-          }).catch(err => {
-            console.error('Error fetching links:', err);
-            process.exit(1); // Exit with an error code
+    - name: Fetch Gametwist Links
+      run: |
+        node -e "
+        const axios = require('axios');
+        const cheerio = require('cheerio');
+        const fs = require('fs');
+        const url = 'https://www.slotparkbonuscode.de/';
+
+        axios.get(url).then(({ data }) => {
+          const $ = cheerio.load(data);
+          const links = [];
+          $('a[href*=\"gametwist\"]').each((index, element) => {
+            links.push($(element).attr('href'));
           });
-          "
+          fs.writeFileSync('links.json', JSON.stringify(links));
+        }).catch(err => {
+          console.error('Error fetching links:', err);
+        });
+        "
 
-      - name: Update Reward Page
-        run: |
-          echo "<html><body>" > reward.html
-          jq -r '.[] | "<a href=\"\(.href)\">\(.text)</a><br/>"' links.json >> reward.html
-          echo "</body></html>" >> reward.html
-          git config --global user.email "prolladmail@gmail.com"
-          git config --global user.name "Prollad99"
-          git add reward.html
-          git commit -m "Update reward links"
-          git push
+    - name: Update Reward Page
+      run: |
+        echo "<html><body>" > reward.html
+        jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' links.json >> reward.html
+        echo "</body></html>" >> reward.html
+        git config --global user.email "prolladmail@gmail.com"
+        git config --global user.name "Prollad99"
+        git add reward.html
+        git commit -m "Update reward links"
+        git push
