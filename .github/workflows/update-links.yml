@@ -25,10 +25,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y jq
           npm install
+          npm install node-fetch@2 jsdom
 
       - name: Fetch and Update Links
         run: |
-          npm install node-fetch@2
           node -e "
             const fetch = require('node-fetch');
             const fs = require('fs');
