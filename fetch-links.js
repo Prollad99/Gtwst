@@ -4,7 +4,7 @@ const fs = require('fs');
 
 console.log("Starting script...");
 
-const url = 'https://techyhigher.com/gametwist-slots-free-coins/';
+const url = 'https://www.slotparkbonuscode.de/';
 
 axios.get(url).then(({ data }) => {
   console.log("Fetched data...");
