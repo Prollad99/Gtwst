@@ -147,37 +147,3 @@ img {
 }
 .resp-sharing-button--telegram:hover {
   background-color: #4B97D1;}
-  
-  .reward {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: 100%;
-  margin: auto;
-  margin-top: 10px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  overflow: hidden;
-  border-radius: 5px;
-  box-shadow:0 .125rem .25rem rgba(0,0,0,.075);
-  }
-  .reward th, td {
-  text-align: left;
-  padding: 10px;
-  border: none;
-  border-bottom: 1px solid #ddd;
-  transition: all 0.2s ease-in-out;
-  }
-  .reward th {
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  }
-  .reward tr:last-child td {
-  border-bottom: none;
-  }
-  .reward tr:nth-child(even) {
-  background-color: #f2f2f2;
-  }
-  .reward .date {
-  color: #999;
-  }
