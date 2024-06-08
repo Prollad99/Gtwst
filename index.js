@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
+
 const url = 'https://techyhigher.com/gametwist-slots-free-coins/';
 
 axios.get(url).then(({ data }) => {
