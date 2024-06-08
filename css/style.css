@@ -13,6 +13,9 @@ line-height:1.625;
 a {
 	text-decoration: none;
 }
+.card-body ul li{
+padding: 10px;
+}
 img {
 	max-width: 100%;
 	height: auto;
