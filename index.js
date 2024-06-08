@@ -9,8 +9,10 @@ axios.get(url).then(({ data }) => {
   const links = [];
   $('a[href*="bit.ly/"]').each((index, element) => {
     const href = $(element).attr('href');
-    const text = $(element).text();
-    links.push({ href, text });
+    const text = $(element).text().trim();
+    const dateMatch = text.match(/\d{2}\.\d{2}\.\d{4}/);
+    const date = dateMatch ? dateMatch[0] : 'Unknown Date';
+    links.push({ href, text: `GameTwist Free Coins - ${date}` });
   });
   console.log('Fetched links:', links);
   fs.writeFileSync('links.json', JSON.stringify(links, null, 2));
