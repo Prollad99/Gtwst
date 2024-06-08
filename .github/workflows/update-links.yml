@@ -24,29 +24,27 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq
-          npm install
-          npm install node-fetch@2 jsdom
+          npm install axios cheerio
 
       - name: Fetch and Update Links
         run: |
           node -e "
-            const fetch = require('node-fetch');
+            const axios = require('axios');
+            const cheerio = require('cheerio');
             const fs = require('fs');
-            const jsdom = require('jsdom');
-            const { JSDOM } = jsdom;
-            fetch('view-source:https://techyhigher.com/gametwist-slots-free-coins/')
-              .then(res => res.text())
-              .then(body => {
-                const dom = new JSDOM(body);
-                const document = dom.window.document;
-                const links = Array.from(document.querySelectorAll('a[href*=\"bit.ly\"]')).map(a => ({ href: a.href }));
-                console.log('Fetched links:', links);
-                fs.writeFileSync('links.json', JSON.stringify(links, null, 2));
-              })
-              .catch(err => {
-                console.error('Error fetching links:', err);
-                process.exit(1);
+            const url = 'https://techyhigher.com/gametwist-slots-free-coins/';
+            axios.get(url).then(({ data }) => {
+              const $ = cheerio.load(data);
+              const links = [];
+              $('a[href*=\"bit.ly/\"]').each((index, element) => {
+                links.push($(element).attr('href'));
               });
+              console.log('Fetched links:', links);
+              fs.writeFileSync('links.json', JSON.stringify(links));
+            }).catch(err => {
+              console.error('Error fetching links:', err);
+              process.exit(1);
+            });
           "
 
       - name: Update Reward Page
