@@ -34,12 +34,12 @@ jobs:
             const fs = require('fs');
             const jsdom = require('jsdom');
             const { JSDOM } = jsdom;
-            fetch('https://www.slotparkbonuscode.de/')
+            fetch('view-source:https://techyhigher.com/gametwist-slots-free-coins/')
               .then(res => res.text())
               .then(body => {
                 const dom = new JSDOM(body);
                 const document = dom.window.document;
-                const links = Array.from(document.querySelectorAll('a[href*=\"slot.pk\"]')).map(a => ({ href: a.href }));
+                const links = Array.from(document.querySelectorAll('a[href*=\"bit.ly\"]')).map(a => ({ href: a.href }));
                 console.log('Fetched links:', links);
                 fs.writeFileSync('links.json', JSON.stringify(links, null, 2));
               })
