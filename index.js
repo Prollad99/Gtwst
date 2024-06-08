@@ -8,7 +8,7 @@ axios.get(url).then(({ data }) => {
   const $ = cheerio.load(data);
   const links = [];
   $('a[href*="bit.ly/"]').each((index, element) => {
-    links.push($(element).attr('href'));
+    links.push({ href: $(element).attr('href') });
   });
   console.log('Fetched links:', links);
   fs.writeFileSync('links.json', JSON.stringify(links));
