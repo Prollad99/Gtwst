@@ -8,11 +8,9 @@ axios.get(url).then(({ data }) => {
   const $ = cheerio.load(data);
   const links = [];
   $('a[href*="bit.ly/"]').each((index, element) => {
-    const href = $(element).attr('href');
+    const link = $(element).attr('href');
     const text = $(element).text().trim();
-    const dateMatch = text.match(/\d{2}\.\d{2}\.\d{4}/);
-    const date = dateMatch ? dateMatch[0] : 'Unknown Date';
-    links.push({ href, text: `GameTwist Free Coins - ${date}` });
+    links.push({ href: link, text: text });
   });
   console.log('Fetched links:', links);
   fs.writeFileSync('links.json', JSON.stringify(links, null, 2));
