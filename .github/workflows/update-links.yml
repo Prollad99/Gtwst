@@ -32,9 +32,9 @@ jobs:
 
       - name: Update Reward Page
         run: |
-          echo "<html><body>" > reward.html
-          jq -r '.[] | "<a href=\"\(.href)\">Gametwist Free Coins</a><br/>"' links.json >> reward.html
-          echo "</body></html>" >> reward.html
+          echo "<html><body><ul>" > reward.html
+          jq -r '.[] | "<li><a href=\"\(.href)\">GameTwist Free Coins - \(.text)</a></li>"' links.json >> reward.html
+          echo "</ul></body></html>" >> reward.html
 
       - name: Configure Git
         run: |
