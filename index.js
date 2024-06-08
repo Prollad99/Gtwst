@@ -1,12 +1,12 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
-const url = 'https://www.slotparkbonuscode.de/';
+const url = 'view-source:https://techyhigher.com/gametwist-slots-free-coins/';
 
 axios.get(url).then(({ data }) => {
   const $ = cheerio.load(data);
   const links = [];
-  $('a[href*="slot.pk/"]').each((index, element) => {
+  $('a[href*="bit.ly/"]').each((index, element) => {
     links.push($(element).attr('href'));
   });
   console.log('Fetched links:', links);
