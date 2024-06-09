@@ -32,7 +32,7 @@ jobs:
 
       - name: Update Reward Page
         run: |
-          echo '<html><body><div class="card shadow-sm mb-2"><div class="card-body"><h2>GameTwist Free Coins Links:</h2><ul>' > reward.html
+          echo '<html><body><div class="card shadow-sm mb-2"><div class="card-body"><h2>GameTwist slots free coins links:</h2><ul>' > reward.html
           jq -r '.[] | "<li><a href=\"" + .href + "\">" + .text + "</a></li>"' links.json >> reward.html
           echo '</ul></div></div></body></html>' >> reward.html
 
@@ -41,13 +41,12 @@ jobs:
           git config --global user.email "prolladmail@gmail.com"
           git config --global user.name "Prollad99"
 
-      - name: Commit changes
+      - name: Commit and Push changes
         run: |
-          git add reward.html links.json package.json package-lock.json
-          git commit -m "Update reward links"
-
-      - name: Push changes
-        env:
-          TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        run: |
-          git push https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/Prollad99/Gtwst.git
+          git add reward.html links.json
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Update reward links"
+            git push https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/Prollad99/Gtwst.git
+          else
+            echo "No changes to commit"
+          fi
